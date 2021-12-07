@@ -1,2 +1,2 @@
-# Twitter_triangle_counting
+# Twitter Triangle Counting
 Using Hadoop
