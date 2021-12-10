@@ -130,3 +130,6 @@ dmypy.json
 
 #other
 data/
+
+triangle_count/
+out/

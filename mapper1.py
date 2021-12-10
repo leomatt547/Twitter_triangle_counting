@@ -1,19 +1,20 @@
-#!/usr/bin/env python
-  
-# import sys because we need to read and write data to STDIN and STDOUT
+# import sys untuk baca STDIN dan STDOUT
 import sys
+import os
+
+# os.environ['HADOOP_HOME'] = "D:\Hadoop\hadoop-3.3.1"
+# sys.path.append("D:\Hadoop\hadoop-3.3.1/bin")
+
+# os.system.setProperty("HADOOP_HOME", "D:\Hadoop\hadoop-3.3.1")
+# os.system.setProperty("hadoop.home.dir", "D:\Hadoop\hadoop-3.3.1")
   
-# reading entire line from STDIN (standard input)
+# baca seluruh line dari STDIN
 for line in sys.stdin:
-    # to remove leading and trailing whitespace
+    # buang spasi
     line = line.strip()
-    # split the line into words
-    words = line.split()
-      
-    # we are looping over the words array and printing the word
-    # with the count of 1 to the STDOUT
-    for word in words:
-        # write the results to STDOUT (standard output);
-        # what we output here will be the input for the
-        # Reduce step, i.e. the input for reducer.py
-        print '%s\t%s' % (word, 1)
+    # split ke dalam array kata
+    inputnya = line.split()
+    
+    #  print pasangan, nanti Intermediate Output akan mengurutkan otomatis
+    print(inputnya[0]+"\t"+inputnya[1])
+    print(inputnya[1]+"\t"+inputnya[0])

@@ -1,3 +1,15 @@
+%HADOOP_HOME%\etc\hadoop\hadoop-env.cmd
 %HADOOP_HOME%\sbin\start-all.cmd
+hdfs dfsadmin -safemode leave
 
-hadoop jar "C:\Hadoop\hadoop-3.3.1\lib\hadoop-streaming-3.3.1.jar" -input /triangle_count/twitter-2010.txt -output /triangle_count/output -mapper "D:\Twitter_triangle_counting\mapper.py" -reducer "D:\Twitter_triangle_counting\reducer.py"
+hdfs dfs -mkdir /triangle_count
+
+hadoop fs -rm -r -skipTrash /triangle_count/output1
+
+hdfs dfs -copyFromLocal D:\Twitter_triangle_counting\data\twitter-2010.txt /triangle_count
+
+hadoop jar "D:\Hadoop\hadoop-3.2.2\lib\hadoop-streaming-3.2.2.jar" -input /triangle_count/twitter-2010.txt -output /triangle_count/output1 -file D:\Twitter_triangle_counting\mapper1.py -mapper "python mapper1.py" -file D:\Twitter_triangle_counting\reducer1.py -reducer "python reducer1.py" 
+
+hadoop jar "D:\Hadoop\hadoop-3.2.2\lib\hadoop-streaming-3.2.2.jar" -input /triangle_count/output1 -output /triangle_count/output2 -file D:\Twitter_triangle_counting\mapper2.py -mapper "python mapper2.py" -file D:\Twitter_triangle_counting\reducer2.py -reducer "python reducer2.py"
+
+hadoop fs -getmerge -nl /triangle_count/output1 file:/D:/Twitter_triangle_counting/out/out1.txt

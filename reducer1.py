@@ -1,37 +1,27 @@
-#!/usr/bin/env python
-  
 from operator import itemgetter
 import sys
+import os
+
+# os.environ['HADOOP_HOME'] = "D:\Hadoop\hadoop-3.3.1"
+# sys.path.append("D:\Hadoop\hadoop-3.3.1/bin")
+
+# os.system.setProperty("HADOOP_HOME", "D:\Hadoop\hadoop-3.3.1")
+# os.system.setProperty("hadoop.home.dir", "D:\Hadoop\hadoop-3.3.1")
   
-current_word = None
-current_count = 0
-word = None
+current_v = None
+v = None
   
-# read the entire line from STDIN
+# import sys untuk baca STDIN dan STDOUT
 for line in sys.stdin:
-    # remove leading and trailing whitespace
+    # buang spasi
     line = line.strip()
     # slpiting the data on the basis of tab we have provided in mapper.py
-    word, count = line.split('\t', 1)
-    # convert count (currently a string) to int
-    try:
-        count = int(count)
-    except ValueError:
-        # count was not a number, so silently
-        # ignore/discard this line
+    u, v = line.split('\t', 1)
+  
+    if current_v == v:
         continue
-  
-    # this IF-switch only works because Hadoop sorts map output
-    # by key (here: word) before it is passed to the reducer
-    if current_word == word:
-        current_count += count
     else:
-        if current_word:
+        if current_v:
             # write result to STDOUT
-            print '%s\t%s' % (current_word, current_count)
-        current_count = count
-        current_word = word
-  
-# do not forget to output the last word if needed!
-if current_word == word:
-    print '%s\t%s' % (current_word, current_count)
+            print(u+"\t"+v)
+        current_v = v
