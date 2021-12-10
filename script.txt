@@ -6,10 +6,27 @@ hdfs dfs -mkdir /triangle_count
 
 hadoop fs -rm -r -skipTrash /triangle_count/output2
 
-hdfs dfs -copyFromLocal D:\Twitter_triangle_counting\data\twitter-2010.txt /triangle_count
+hdfs dfs -copyFromLocal E:\Leonard\out1.txt /triangle_count
 
 hadoop jar "D:\Hadoop\hadoop-3.2.2\lib\hadoop-streaming-3.2.2.jar" -input /triangle_count/twitter-2010.txt -output /triangle_count/output1 -file D:\Twitter_triangle_counting\mapper1.py -mapper "python mapper1.py" -file D:\Twitter_triangle_counting\reducer1.py -reducer "python reducer1.py" 
 
 hadoop jar "D:\Hadoop\hadoop-3.2.2\lib\hadoop-streaming-3.2.2.jar" -input /triangle_count/output1 -output /triangle_count/output2 -file D:\Twitter_triangle_counting\mapper2.py -mapper "python mapper2.py" -file D:\Twitter_triangle_counting\reducer2.py -reducer "python reducer2.py"
 
+hadoop fs -getmerge -nl /triangle_count/output2 file:/D:/out_2.txt
+
+hadoop jar "D:\Hadoop\hadoop-3.2.2\lib\hadoop-streaming-3.2.2.jar" -input /triangle_count/output2 -output /triangle_count/output3 -file D:\Twitter_triangle_counting\mapper3.py -mapper "python mapper3.py" -file D:\Twitter_triangle_counting\reducer3.py -reducer "python reducer3.py"
+
+hadoop fs -getmerge -nl /triangle_count/output3 file:/D:/out_3.txt
+
 hadoop fs -getmerge -nl /triangle_count/output1 file:/D:/Twitter_triangle_counting/out/out1.txt
+
+#############
+hdfs dfs -copyFromLocal E:\Leonard\out1.txt /triangle_count
+
+hadoop jar "D:\Hadoop\hadoop-3.2.2\lib\hadoop-streaming-3.2.2.jar" -input /triangle/twitter.txt -output /triangle_count/out_1 -file D:\Twitter_triangle_counting\mapper1.py -mapper "python mapper1.py" -file D:\Twitter_triangle_counting\reducer1.py -reducer "python reducer1.py" 
+
+hadoop fs -getmerge -nl /triangle_count/out_1 file:/D:/
+
+hadoop jar "D:\Hadoop\hadoop-3.2.2\lib\hadoop-streaming-3.2.2.jar" -input /triangle_count/out_1 -output /triangle_count/out_2 -file D:\Twitter_triangle_counting\mapper2.py -mapper "python mapper2.py" -file D:\Twitter_triangle_counting\reducer2.py -reducer "python reducer2.py" 
+
+hadoop jar "D:\Hadoop\hadoop-3.2.2\lib\hadoop-streaming-3.2.2.jar" -input /triangle_count/out_2 -output /triangle_count/out_3 -file D:\Twitter_triangle_counting\mapper2.py -mapper "python mapper3.py" -file D:\Twitter_triangle_counting\reducer2.py -reducer "python reducer3.py" 

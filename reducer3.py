@@ -3,7 +3,6 @@
 from operator import itemgetter
 import sys
   
-current_word = None
 sum = 0
 word = None
   
@@ -18,7 +17,7 @@ for line in sys.stdin:
     except ValueError:
         continue
     sum += count
-  
+    
 # keluarkan output trianglenya
 print("triangle" + "\t" + str(sum))
 

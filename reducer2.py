@@ -2,9 +2,17 @@
 
 from operator import itemgetter
 import sys
+import os
 
 def factorial(n):
-    return 1 if (n==1 or n==0) else n * factorial(n - 1)
+    #return 1 if (n==1 or n==0) else n * factorial(n - 1)
+    factorial = 1    
+    if n == 0:
+        factorial = 1    
+    else:
+        for i in range(1,n + 1):
+            factorial = factorial*i
+    return factorial 
 
 def nCr(n,r):
     a = factorial(n)
@@ -34,10 +42,3 @@ for line in sys.stdin:
                 print(current_word+"\t"+"X")
         current_count = 1
         current_word = word
-
-if(current_count>1):
-    # write result to STDOUT
-    current_com = nCr(current_count, 2)
-    print(current_word+"\t"+str(current_com))
-else:
-    print(current_word+"\t"+"X")

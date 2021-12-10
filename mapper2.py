@@ -2,6 +2,7 @@
 
 # import sys untuk baca STDIN dan STDOUT
 import sys
+import os
   
 # baca seluruh line dari STDIN
 for line in sys.stdin:
