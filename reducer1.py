@@ -1,13 +1,8 @@
+#!/usr/bin/env python
+
 from operator import itemgetter
 import sys
-import os
 
-# os.environ['HADOOP_HOME'] = "D:\Hadoop\hadoop-3.3.1"
-# sys.path.append("D:\Hadoop\hadoop-3.3.1/bin")
-
-# os.system.setProperty("HADOOP_HOME", "D:\Hadoop\hadoop-3.3.1")
-# os.system.setProperty("hadoop.home.dir", "D:\Hadoop\hadoop-3.3.1")
-  
 current_v = None
 v = None
   

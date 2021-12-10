@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 # import sys untuk baca STDIN dan STDOUT
 import sys
   
@@ -7,13 +9,8 @@ for line in sys.stdin:
     line = line.strip()
     # split ke dalam array kata
     u, v = line.split("\t",1)
-    try:
-        u = int(u)
-        v = int(v)
-    except ValueError:
-        # count was not a number, so silently
-        # ignore/discard this line
+    if v == "X":
         continue
-    if v > u:
-        #pastikan node terurut dari terkecil ke terbesar
-        print(u+"\t"+v+"\t"+"X")
+    else:
+        #Format(key, count)
+        print(str(u)+"\t"+str(v))
