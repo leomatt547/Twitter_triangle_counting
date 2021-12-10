@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 # import sys untuk baca STDIN dan STDOUT
 import sys
   
@@ -11,9 +13,7 @@ for line in sys.stdin:
         u = int(u)
         v = int(v)
     except ValueError:
-        # count was not a number, so silently
-        # ignore/discard this line
         continue
     if v > u:
         #pastikan node terurut dari terkecil ke terbesar
-        print(u+"\t"+v+"\t"+"X")
+        print(str(u)+"\t"+str(v)+"\t"+"X")

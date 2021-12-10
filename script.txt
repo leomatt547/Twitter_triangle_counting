@@ -4,7 +4,7 @@ hdfs dfsadmin -safemode leave
 
 hdfs dfs -mkdir /triangle_count
 
-hadoop fs -rm -r -skipTrash /triangle_count/output1
+hadoop fs -rm -r -skipTrash /triangle_count/output2
 
 hdfs dfs -copyFromLocal D:\Twitter_triangle_counting\data\twitter-2010.txt /triangle_count
 

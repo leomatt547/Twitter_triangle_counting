@@ -1,41 +1,43 @@
+#!/usr/bin/env python
+
 from operator import itemgetter
 import sys
 
-current_u = None
-list_v = []
-u = None
+def factorial(n):
+    return 1 if (n==1 or n==0) else n * factorial(n - 1)
+
+def nCr(n,r):
+    a = factorial(n)
+    b = factorial(r)
+    c = factorial(n-r)
+    return int(a/(b*c))
+
+current_word = None
+current_count = 0
+word = None
 
 # import sys untuk baca STDIN dan STDOUT
-for line in sys.stdin:
+for line in sys.stdin:    
     # buang spasi
     line = line.strip()
     # slpiting the data on the basis of tab we have provided in mapper.py
-    u, v, status = line.split('\t',2)
-    try:
-        u = int(u)
-        v = int(v)
-    except ValueError:
-        # count was not a number, so silently
-        # ignore/discard this line
-        continue
-    if current_u == u:
-        list_v.append(v)
+    word, v, status = line.split('\t',2)
+    if current_word == word:
+        current_count += 1
     else:
-        if len(list_v)>1:
-            # Kombinasi pasangan
-            for i in range(len(list_v)):
-                for j in range(i+1, len(list_v)-1):
-                    print(u+"\t"+str(list_v[i])+"\t"+str(list_v[j]))
-        else:
-            print(u+"\t"+v+"\t"+"X")
-        current_u = u
-        list_v = []
-    
-#Operasi terakhir
-if len(list_v)>1:
-    # Kombinasi pasangan
-    for i in range(len(list_v)):
-        for j in range(i+1, len(list_v)-1):
-            print(u+"\t"+str(list_v[i])+"\t"+str(list_v[j]))
+        if current_word:
+            if(current_count>1):
+                # write result to STDOUT
+                current_com = nCr(current_count, 2)
+                print(current_word+"\t"+str(current_com))
+            else:
+                print(current_word+"\t"+"X")
+        current_count = 1
+        current_word = word
+
+if(current_count>1):
+    # write result to STDOUT
+    current_com = nCr(current_count, 2)
+    print(current_word+"\t"+str(current_com))
 else:
-    print(u+"\t"+v+"\t"+"X")
+    print(current_word+"\t"+"X")
